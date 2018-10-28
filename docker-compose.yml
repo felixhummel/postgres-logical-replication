@@ -1,0 +1,23 @@
+version: '3.5'
+
+services:
+  pub:
+    image: postgres:11
+    environment:
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - pub_data:/var/lib/postgresql/data
+  sub:
+    image: postgres:11
+    environment:
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - sub_data:/var/lib/postgresql/data
+
+volumes:
+  pub_data:
+    labels:
+      - de.felixhummel.project=postgres-logical-replication
+  sub_data:
+    labels:
+      - de.felixhummel.project=postgres-logical-replication
