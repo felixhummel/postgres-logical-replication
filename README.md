@@ -14,6 +14,7 @@ insert into foo values
 (2);
 EOF
 
+# here, sub MUST be able to connect to pub
 dc exec -upostgres sub psql -c "CREATE SUBSCRIPTION mysub CONNECTION 'dbname=postgres host=pub user=postgres password=password' PUBLICATION mypub;"
 dc exec -upostgres sub psql -c "SELECT * FROM foo"
 ```
