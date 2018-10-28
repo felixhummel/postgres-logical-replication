@@ -1,18 +1,28 @@
 version: '3.5'
 
 services:
+  # dev:
+  #   image: felix/dev
+  #   volumes:
+  #     - pub_data:/mnt/pub
+  #     - sub_data:/mnt/sub
   pub:
     image: postgres:11
+    command: postgres -c wal_level=logical
     environment:
       - POSTGRES_PASSWORD=password
     volumes:
       - pub_data:/var/lib/postgresql/data
+      - ./init/pub:/docker-entrypoint-initdb.d
   sub:
     image: postgres:11
+    command: postgres -c wal_level=logical
     environment:
       - POSTGRES_PASSWORD=password
     volumes:
       - sub_data:/var/lib/postgresql/data
+      - ./init/sub:/docker-entrypoint-initdb.d
+
 
 volumes:
   pub_data:

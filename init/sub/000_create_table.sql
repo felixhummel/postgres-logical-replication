@@ -1,0 +1,1 @@
+CREATE TABLE foo (i INT);
